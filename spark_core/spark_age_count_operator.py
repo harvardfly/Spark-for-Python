@@ -59,7 +59,7 @@ def format_data_rdd():
 
     return format_rdd_data
 
-
+@time_func
 def operator_rdd():
     """
     对rdd数据集执行求和、求平均值操作
