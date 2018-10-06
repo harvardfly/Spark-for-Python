@@ -106,4 +106,3 @@ db.sql*
 static/*
 
 uwsgi.ini
-celery.conf
