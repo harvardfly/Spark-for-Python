@@ -1,3 +1,4 @@
+import os
 from pyspark import SparkConf, SparkContext
 from operator import add
 
@@ -26,7 +27,8 @@ def count_word_by_sort():
         lambda x: (x[1], x[0])
     ).sortByKey(False).map(lambda x: (x[1], x[0]))
     print(result_rdd.collect())
-    result_rdd.saveAsTextFile("result")
+    if not os.path.exists("result"):
+        result_rdd.saveAsTextFile("result")
 
 
 count_word_by_sort()
