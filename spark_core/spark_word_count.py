@@ -5,6 +5,8 @@ from operator import add
 conf = SparkConf()
 sc = SparkContext(conf=conf)
 
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 def format_read_from_text():
     """
@@ -12,7 +14,7 @@ def format_read_from_text():
     从文件中读取单词  格式化后将其转换为RDD为数据集
     :return:
     """
-    file_rdd = sc.textFile("cnsa_news.txt")
+    file_rdd = sc.textFile("{}/cnsa_news.txt".format(current_dir))
     format_rdd = file_rdd.flatMap(lambda s: s.strip(".").split(" ")).map(lambda x: (x, 1))
     return format_rdd
 

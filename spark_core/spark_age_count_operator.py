@@ -8,6 +8,8 @@ from operator import add
 conf = SparkConf()
 sc = SparkContext(conf=conf)
 
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 def time_func(func):
     """
@@ -47,17 +49,18 @@ def format_data_rdd():
     格式化数据集为所需的rdd
     :return:
     """
-    file_path = "name_age.txt"
+    file_path = "{}/name_age.txt".format(current_dir)
     if not os.path.exists(file_path):
         try:
             gen_random_data(file_path)
         except Exception as e:
             print(e)
 
-    text_rdd = sc.textFile(file_path)
+    text_rdd = sc.textFile("file://{}".format(file_path))
     format_rdd_data = text_rdd.map(lambda s: s.split("\t")[1])
 
     return format_rdd_data
+
 
 @time_func
 def operator_rdd():
@@ -66,6 +69,7 @@ def operator_rdd():
     :return:
     """
     data_rdd = format_data_rdd()
+
     counts = data_rdd.count()
     sum_age = data_rdd.map(lambda x: int(x)).reduce(add)
 
