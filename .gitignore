@@ -110,3 +110,5 @@ uwsgi.ini
 result/
 my_random_forest_model/
 kmeans_model/
+
+settings.py

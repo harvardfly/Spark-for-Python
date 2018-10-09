@@ -1,0 +1,7 @@
+MYSQL_CONF = {
+    'host': '192.168.xx.xx',
+    'user': 'xxx',
+    'password': 'password',
+    'db': 'xxx',
+    'port': 3306
+}
