@@ -1,4 +1,4 @@
-# Spark for Python
+# 项目说明
 基于PySpark的一些demo,主要分为以下模块：
 ```angular2html
 1.spark_core:spark的基本操作，统计、wordcount、TopN等,数据主要来自英文新闻网站和自己随机构造的数据
@@ -7,7 +7,11 @@
 
 ```
   
-  
+# 项目使用
+cd Spark-for-Python  进入到项目
+pip install -r requirements.txt  安装所需的pip包
+cp settings.py.example settings.py  修改配置文件
+
 # 版本控制
 ```angular2html
 1.Spark版本为2.3.2 
