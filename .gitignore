@@ -108,3 +108,4 @@ static/*
 uwsgi.ini
 
 result/
+my_random_forest_model/

@@ -20,7 +20,9 @@ def random_forest():
     80%数据作为训练数据  20%数据作为测试数据
     :return:
     """
-    data_rdd = MLUtils.loadLibSVMFile(sc, 'mllib/sample_libsvm_data.txt')
+    data_rdd = MLUtils.loadLibSVMFile(
+        sc, '{}/mllib/sample_libsvm_data.txt'.format(current_dir)
+    )
 
     train_data_rdd, test_data_rdd = data_rdd.randomSplit([0.8, 0.2])
     model = RandomForest.trainClassifier(
