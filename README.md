@@ -1,4 +1,4 @@
-# Spark-for-Python-demo
+# Spark for Python
 基于PySpark的一些demo,主要分为以下模块：
 ```angular2html
 1.spark_core:spark的基本操作，统计、wordcount、TopN等,数据主要来自英文新闻网站和自己随机构造的数据
