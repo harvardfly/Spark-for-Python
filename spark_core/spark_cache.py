@@ -13,7 +13,7 @@ def uncache_data():
     first_start = time.time()
     file_rdd.count()
     first_end = time.time()
-    print("uncache first:{}".format(first_end-first_start))
+    print("uncache first:{}".format(first_end - first_start))
 
     second_start = time.time()
     file_rdd.count()
@@ -34,6 +34,4 @@ def cache_data():
     print("cache second:{}".format(second_end - second_start))
 
 
-# uncache_data()
-cache_data()
 sc.stop()
