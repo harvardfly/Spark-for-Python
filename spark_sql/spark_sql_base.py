@@ -1,13 +1,15 @@
 # coding: utf-8
 from pyspark.sql import SparkSession
 from settings import MYSQL_CONF
-from abc import abstractmethod
+from pyspark import SparkConf
 
 
 class SparkSql(object):
+    conf = SparkConf()
+
     def __init__(self):
         self.spark = None
-        self.connector_url = None
+        self.connector = None
 
         self.init_spark_confer()
         self.init_mysql_connector()
@@ -18,7 +20,7 @@ class SparkSql(object):
         :return:
         """
         self.spark = SparkSession.builder \
-            .appName("spark_sql") \
+            .config(conf=self.conf) \
             .getOrCreate()
 
     def init_mysql_connector(self):
@@ -32,17 +34,26 @@ class SparkSql(object):
             MYSQL_CONF['db']
         )
 
-        self.df = self.spark.read \
+        self.connector = self.spark.read \
             .format("jdbc") \
             .option("url", connector_url) \
             .option("user", MYSQL_CONF['user']) \
             .option("password", MYSQL_CONF['password'])
 
-    def load_table_dataframe (self, table_name):
+    def load_table_dataframe(self, table_name):
         """
         读取数据库表的DATAFRAME
         :param table_name:
         :return:
         """
-        table_dataframe = self.df.option('dbtable', table_name).load()
+        table_dataframe = self.connector.option('dbtable', table_name).load()
+        print(table_dataframe)
         return table_dataframe
+
+    def __del__(self):
+        """
+        对象任务完成后关闭链接
+        :return:
+        """
+        print('关闭spark链接')
+        self.spark.stop()
