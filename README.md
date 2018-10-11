@@ -12,7 +12,10 @@
 cd Spark-for-Python  进入到项目
 pip install -r requirements.txt  安装所需的pip包
 cp settings.py.example settings.py  修改配置文件
-cd spark_sql   cp mysql-connector-java-8.0.11.jar /home/ubuntu/spark-2.3.2-bin-hadoop2.7/jars 将mysql-connector放到spark的jars目录
+
+将mysql-connector放到spark的jars目录
+cd spark_sql
+cp mysql-connector-java-8.0.11.jar /home/ubuntu/spark-2.3.2-bin-hadoop2.7/jars
 ```
 
 # 版本控制
