@@ -1,21 +1,25 @@
-from __future__ import print_function
-
-import sys
-
-from pyspark import SparkContext
+# coding:utf-8
+from pyspark import (
+    SparkContext, SparkConf
+)
 from pyspark.streaming import StreamingContext
+from operator import add
+
+conf = SparkConf()
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: network_wordcount.py <hostname> <port>", file=sys.stderr)
-        exit(-1)
-    sc = SparkContext(appName="PythonStreamingNetworkWordCount")
-    ssc = StreamingContext(sc, 1)
+    """
+    一个基于spark_streaming的简单wordcount，
+    服务端nc -lk监听9999端口，在terminal输入word，输出统计的wordcount
+    """
+    sc = SparkContext(conf=conf, appName="PythonStreamingNetworkWordCount")
+    ssc = StreamingContext(sc, 5)
 
-    lines = ssc.socketTextStream(sys.argv[1], int(sys.argv[2]))
-    counts = lines.flatMap(lambda line: line.split(" "))\
-                  .map(lambda word: (word, 1))\
-                  .reduceByKey(lambda a, b: a+b)
+    lines = ssc.socketTextStream("localhost", 9999)
+    counts = lines.flatMap(lambda line: line.split(" ")) \
+        .map(lambda word: (word, 1)) \
+        .reduceByKey(add)
+
     counts.pprint()
 
     ssc.start()
