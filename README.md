@@ -1,5 +1,5 @@
 # 项目说明
-基于PySpark的一些demo,主要分为以下模块：
+基于PySpark的统计分析,主要分为以下模块：
 ```angular2html
 1.spark_core:spark的基本操作，统计、wordcount、TopN等,数据主要来自英文新闻网站和自己随机构造的数据
 2.spark_mllib:针对spark mllib里面机器学习算法的使用做了demo及说明，数据集来自spark2.3.2安装包里面mllib自带的数据集
