@@ -5,13 +5,12 @@ from pyspark import (
 from pyspark.streaming import StreamingContext
 from operator import add
 
-conf = SparkConf()
-
 if __name__ == "__main__":
     """
-    一个基于spark_streaming的简单wordcount，
-    服务端nc -lk监听9999端口，在terminal输入word，输出统计的wordcount
+    一个基于spark_streaming的简单wordcount，服务端nc -lk监听9999端口，
+    在terminal输入word，streaming每隔5秒输出统计的wordcount
     """
+    conf = SparkConf()
     sc = SparkContext(conf=conf, appName="PythonStreamingNetworkWordCount")
     ssc = StreamingContext(sc, 5)
 
