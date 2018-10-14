@@ -1,7 +1,14 @@
+# MySQL配置文件
 MYSQL_CONF = {
-    'host': '192.168.xx.xx',
-    'user': 'xxx',
-    'password': 'password',
-    'db': 'xxx',
+    'host': '192.168.33.11',
+    'user': 'root',
+    'password': '123456',
+    'db': 'ccnu_resource',
     'port': 3306
+}
+
+# ELASTIC的配置文件
+ES_CONF = {
+    'ELASTIC_HOST': '',
+    'WEATHER_INDEX_NAME': ''
 }
