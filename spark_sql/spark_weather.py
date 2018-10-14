@@ -67,6 +67,8 @@ def get_weather_result():
         .withColumn("percentage", group_2017['count'] / df_2017.count())
     result_2017.show()
 
+    return result_2017
+
 
 def write_result_es():
     """
@@ -74,11 +76,11 @@ def write_result_es():
     :return:
     """
     result_2017 = get_weather_result()
-    result_2017.selectExpr("Grade as grade", "count", "precent") \
-        .write.format("org.elasticsearch.spark.sql") \
+    result_2017.write.format("org.elasticsearch.spark.sql") \
         .option("es.nodes", "{}".format(ES_CONF['ELASTIC_HOST'])) \
         .mode("overwrite") \
         .save("{}/pm_value".format(ES_CONF['WEATHER_INDEX_NAME']))
+
 
 write_result_es()
 spark.stop()
