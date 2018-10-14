@@ -53,7 +53,7 @@ def get_weather_result():
     # 查看Schema
     df_2017.printSchema()
 
-    # 创建对应级别的
+    # 通过udf将字符型health_level转换为column
     level_function_udf = udf(get_health_level, StringType())
 
     # 新建列healthy_level 并healthy_level分组
